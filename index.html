@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="tja688 的个人主页，展示项目、近况与联系方式。"
+    />
+    <title>TJA688 | Personal Site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top">TJA688</a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="#about">关于</a>
+          <a href="#projects">项目</a>
+          <a href="#contact">联系</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <p class="eyebrow">GitHub Pages Starter</p>
+          <h1>把这里变成你的正式个人主页。</h1>
+          <p class="hero-copy">
+            这是一个开箱即用的 GitHub Pages 静态站点骨架。当前内容是占位文案，
+            你可以很快替换成自己的简介、作品和联系方式。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">查看项目区</a>
+            <a class="button button-secondary" href="https://github.com/tja688" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+          <ul class="hero-highlights" aria-label="站点特点">
+            <li>纯静态文件，推送即部署</li>
+            <li>适合个人主页与作品集</li>
+            <li>后续可平滑升级为更复杂站点</li>
+          </ul>
+        </section>
+
+        <section class="section-grid" id="about">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2>这是一个适合继续扩展的首页基底。</h2>
+          </div>
+          <div class="card-stack">
+            <article class="card">
+              <h3>个人介绍</h3>
+              <p>
+                把这里改成你的身份介绍，例如你是谁、主要做什么、现在关注哪些方向。
+              </p>
+            </article>
+            <article class="card">
+              <h3>当前状态</h3>
+              <p>
+                可以写最近在做的项目、游戏、研究主题，或者你希望别人如何认识你。
+              </p>
+            </article>
+            <article class="card">
+              <h3>站点目标</h3>
+              <p>
+                这个版本优先保证结构清晰、托管简单，适合作为长期维护的正式主页起点。
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-grid" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Projects</p>
+            <h2>先留出作品展示位，后面直接往里填。</h2>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <span class="project-tag">Featured</span>
+              <h3>项目 A</h3>
+              <p>放一个你最想展示的项目简介，描述它解决了什么问题。</p>
+              <a href="https://github.com/tja688" target="_blank" rel="noreferrer">项目链接</a>
+            </article>
+            <article class="project-card">
+              <span class="project-tag">In Progress</span>
+              <h3>项目 B</h3>
+              <p>这里适合展示正在推进中的作品、实验原型或长期计划。</p>
+              <a href="https://github.com/tja688" target="_blank" rel="noreferrer">了解更多</a>
+            </article>
+            <article class="project-card">
+              <span class="project-tag">Archive</span>
+              <h3>项目 C</h3>
+              <p>旧项目、比赛作品、课程项目也可以收录，逐步沉淀成作品集。</p>
+              <a href="https://github.com/tja688" target="_blank" rel="noreferrer">查看仓库</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="contact-panel" id="contact">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>把你的联系入口收在这里。</h2>
+            <p>
+              你可以改成邮箱、社媒、博客、Steam、itch.io 或任何你希望别人找到你的方式。
+            </p>
+          </div>
+          <div class="contact-links">
+            <a href="mailto:156814864+tja688@users.noreply.github.com">Email</a>
+            <a href="https://github.com/tja688" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="current-year"></span> TJA688. Built with GitHub Pages.</p>
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
