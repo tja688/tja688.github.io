@@ -1,34 +1,48 @@
-# tja688.github.io
+# TJA688 Game Portfolio Prototype
 
-`tja688.github.io` 是 GitHub Pages 用户站点仓库，对应默认访问地址：
+一个可部署到 GitHub Pages 的单页个人主页原型，使用游戏 UI 的交互语言来展示作品，而不是传统简历站。
 
-<https://tja688.github.io>
+## 技术栈
 
-## 当前结构
+- Vite
+- React + TypeScript
+- GSAP
+- PixiJS
+- Howler.js
+- SCSS
 
-- `index.html`：主页入口
-- `styles.css`：全站样式
-- `script.js`：轻量交互
-- `404.html`：自定义 404 页面
+## 当前内容
 
-## 本地预览
+- 首屏 Hero 演出
+- 三张占位作品卡
+- 游戏式详情弹层
+- Pixi 背景粒子 / 飞线 / 脉冲层
+- Howler 短音效反馈
+- 调试开关：音效、Pixi、低特效、模拟 reduced motion
 
-这是一个纯静态站点，直接双击 `index.html` 就能看页面。
-
-如果你想用本地服务预览，也可以在项目目录运行：
+## 本地运行
 
 ```powershell
-python -m http.server 8000
+npm install
+npm run dev
 ```
 
-然后访问 <http://localhost:8000>
+## 构建
 
-## 发布
+```powershell
+npm run build
+```
 
-推送到 `main` 分支后，GitHub Pages 会把它作为用户主页站点发布。
+构建产物输出到 `dist/`。
 
-## 后续建议
+## GitHub Pages
 
-1. 把占位文案替换成你自己的简介与项目内容。
-2. 增加真实项目截图、头像、简历下载等模块。
-3. 如果以后需要博客、组件化开发或多页面结构，再升级到 Vite / Astro / Next.js。
+仓库已经包含 `.github/workflows/deploy.yml`，推送到 `main` 后会通过 GitHub Actions 构建并发布到 GitHub Pages。
+
+这个仓库是用户主页仓库 `tja688.github.io`，所以 `vite.config.ts` 中的 `base` 设为根路径 `/`。
+
+## 后续替换建议
+
+1. 把 `src/data/works.ts` 里的占位项目替换成真实作品。
+2. 把 `src/data/profile.ts` 里的简介、技能和外链替换成个人信息。
+3. 将占位封面换成压缩后的真实截图或短视频封面。

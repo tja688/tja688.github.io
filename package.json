@@ -1,0 +1,28 @@
+{
+  "name": "tja688.github.io",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vite build",
+    "preview": "vite preview"
+  },
+  "homepage": "https://tja688.github.io",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "howler": "^2.2.4",
+    "pixi.js": "^8.14.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.12",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "sass": "^1.99.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.7"
+  }
+}
