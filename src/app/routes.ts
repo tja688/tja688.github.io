@@ -1,5 +1,5 @@
 export const sectionLinks = [
-  { label: 'Works', href: '#works' },
-  { label: 'About', href: '#about' },
-  { label: 'Signal', href: '#signal' },
+  { label: '作品', href: '#works' },
+  { label: '方法', href: '#method' },
+  { label: '联系', href: '#signal' },
 ] as const;
