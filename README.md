@@ -1,6 +1,8 @@
 # TJA688 个人主页
 
-基于 Vite + React + TypeScript + SCSS 的个人站点骨架，部署到 GitHub Pages。
+Vite + React + TypeScript + Tailwind CSS + Motion，部署到 GitHub Pages。
+
+项目级 skill：`.cursor/skills/frontend-design`。
 
 ## 本地运行
 

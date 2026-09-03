@@ -1,0 +1,6 @@
+Vendored from Anthropic's official frontend-design skill.
+
+https://github.com/anthropics/skills/tree/main/skills/frontend-design
+https://claude.com/blog/improving-frontend-design-through-skills
+
+SKILL.md and LICENSE.txt are unmodified copies of the upstream files.
