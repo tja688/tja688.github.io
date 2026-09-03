@@ -1,15 +1,47 @@
 @import 'tailwindcss';
 
+/* 自托管字体：拉丁展示字（可变宽度）、等宽标签字、中文宋体标题（按 unicode 切片按需加载） */
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/noto-serif-sc/700.css';
+
 @theme {
-  --color-page: #060b16;
-  --color-ink: #f3f8ff;
-  --color-ink-muted: rgb(243 248 255 / 0.7);
+  /* 暖炭底 + 骨白字 + 群青做唯一的强调色（只给物理晶格、链接与少量标记） */
+  --color-bg: #18171b;
+  --color-surface: #201f24;
+  --color-surface-2: #2a292f;
+  --color-line: rgb(236 231 221 / 0.1);
+  --color-line-strong: rgb(236 231 221 / 0.22);
+  --color-ink: #ece7dd;
+  --color-ink-muted: #a09b92;
+  --color-ink-faint: #6f6b65;
+  --color-accent: #4a63ff;
+  --color-accent-ink: #9fabff;
+
+  --font-sans:
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei',
+    'Noto Sans CJK SC', 'Source Han Sans SC', system-ui, sans-serif;
+  --font-serif:
+    'Noto Serif SC', 'Songti SC', 'Source Han Serif SC', 'Noto Serif CJK SC', serif;
+  --font-display:
+    'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: linear(
+    0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017,
+    1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%,
+    1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%,
+    0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1
+  );
 }
 
 @layer base {
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -19,7 +51,16 @@
   }
 
   body {
-    @apply m-0 min-w-80 bg-page font-sans text-ink antialiased;
+    @apply m-0 min-w-80 bg-bg font-sans text-ink antialiased;
+    font-size: 16px;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'palt' 1;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
   }
 
   button,
@@ -35,4 +76,99 @@
   a {
     text-decoration: none;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  dialog::backdrop {
+    background: rgb(10 10 12 / 0.72);
+    backdrop-filter: blur(8px);
+  }
+
+  /* 详情弹层：弹簧式弹入，遮罩淡入 */
+  .project-dialog[open] {
+    animation: dialog-in 0.55s var(--ease-spring);
+  }
+  .project-dialog[open]::backdrop {
+    animation: fade-in 0.35s ease-out;
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project-dialog[open],
+    .project-dialog[open]::backdrop {
+      animation: none;
+    }
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@utility font-display-wide {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-weight: 640;
+  letter-spacing: -0.01em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+@utility hairline {
+  border-color: var(--color-line);
+}
+
+/* 内容容器：桌面 1200 + 侧边留白 */
+@utility container-x {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* 媒体框：所有实机截图/视频统一的一层薄边 */
+@utility media-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+
+/* 细颗粒：SVG 噪声，压掉暗部渐变的色阶断层 */
+@utility grain {
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: linear-gradient(to bottom, black 40%, transparent);
+}
+
+/* 交互元素的共通过渡 */
+@utility ease-expo {
+  transition-timing-function: var(--ease-out-expo);
 }

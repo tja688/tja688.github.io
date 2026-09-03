@@ -12,3 +12,6 @@
 *.mov filter=lfs diff=lfs merge=lfs -text
 *.woff filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
+
+# 站点实际引用的媒体走普通 git：GitHub Pages 构建时 actions/checkout 不拉取 LFS 对象
+public/media/** !filter !diff !merge -text
