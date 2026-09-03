@@ -35,7 +35,7 @@ export interface Project {
   status: ProjectStatus;
   /** 赛事 / 场合 */
   event?: string;
-  /** 奖项（存在时会进入「履历」的获奖记录） */
+  /** 奖项（精选卡片、全部项目列表和详情弹窗会展示） */
   award?: string;
   /** 我在项目中的角色 */
   role: string;
@@ -59,6 +59,12 @@ export interface Project {
 export interface Education {
   school: string;
   degree: string;
+  detail?: string[];
+}
+
+export interface Work {
+  org: string;
+  role: string;
   detail?: string[];
 }
 
@@ -93,6 +99,7 @@ export interface Profile {
   /** 当前在做的事（内容保留，供别处取用） */
   now: { label: string; text: string; projectSlug?: string };
   education: Education[];
+  work: Work[];
   /** 技能按诚实程度分层 */
   skills: { level: string; items: string[] }[];
   plays: { label: string; value: string }[];

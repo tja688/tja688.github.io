@@ -1,16 +1,9 @@
 import { profile } from '../content/profile';
-import { awardedProjects } from '../content/projects';
 import { Reveal } from './ui/Reveal';
 import { SectionHeader } from './ui/SectionHeader';
-import { AwardMark } from './FeaturedWork';
-import { Arrow } from './ui/Button';
 
-interface Props {
-  onOpenProject: (slug: string) => void;
-}
-
-export function About({ onOpenProject }: Props) {
-  const { bio, education, skills, plays, photos } = profile;
+export function About() {
+  const { bio, education, work, skills, plays, photos } = profile;
 
   return (
     <section id="about" className="container-x border-t border-line pt-24 pb-24 md:pt-32 md:pb-32">
@@ -77,26 +70,17 @@ export function About({ onOpenProject }: Props) {
 
         <div className="md:col-span-2 lg:col-span-1">
           <Reveal delay={0.1}>
-            <Block label="获奖">
-              <ul className="space-y-4">
-                {awardedProjects.map((p) => (
-                  <li key={p.slug}>
-                    <button
-                      type="button"
-                      onClick={() => onOpenProject(p.slug)}
-                      className="group grid w-full grid-cols-[3.5rem_1fr_auto] items-baseline gap-3 text-left text-sm"
-                    >
-                      <span className="font-mono text-[12px] text-ink-faint tabular-nums">{p.year}</span>
-                      <span className="min-w-0">
-                        <span className="font-medium text-ink transition-colors group-hover:text-accent-ink">{p.title}</span>
-                        <span className="mt-0.5 flex items-start gap-1.5 text-ink-muted">
-                          <AwardMark />
-                          <span>{p.award}</span>
-                        </span>
-                        {p.event && <span className="mt-0.5 block text-ink-faint">{p.event}</span>}
-                      </span>
-                      <Arrow className="self-center text-ink-faint transition-[transform,color] duration-300 ease-expo group-hover:translate-x-0.5 group-hover:text-ink" />
-                    </button>
+            <Block label="工作">
+              <ul className="space-y-5">
+                {work.map((w) => (
+                  <li key={w.org}>
+                    <p className="font-medium text-ink">{w.org}</p>
+                    <p className="text-sm text-ink-muted">{w.role}</p>
+                    {w.detail?.map((d) => (
+                      <p key={d} className="mt-1 text-sm text-ink-muted">
+                        {d}
+                      </p>
+                    ))}
                   </li>
                 ))}
               </ul>
@@ -106,18 +90,20 @@ export function About({ onOpenProject }: Props) {
       </div>
 
       <Reveal className="mt-20 md:mt-28">
-        <ul className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
-          {photos.map((ph) => (
-            <li key={ph.src}>
-              <figure>
-                <div className="media-frame aspect-[4/3]">
-                  <img src={ph.src} alt={ph.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                </div>
-                <figcaption className="mt-2.5 text-[13px] leading-snug text-ink-muted">{ph.caption}</figcaption>
-              </figure>
-            </li>
-          ))}
-        </ul>
+        <Block label="相册">
+          <ul className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+            {photos.map((ph) => (
+              <li key={ph.src}>
+                <figure>
+                  <div className="media-frame aspect-[4/3]">
+                    <img src={ph.src} alt={ph.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                  </div>
+                  <figcaption className="mt-2.5 text-[13px] leading-snug text-ink-muted">{ph.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Block>
       </Reveal>
     </section>
   );

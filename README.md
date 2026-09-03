@@ -19,7 +19,7 @@ npm run preview   # 本地预览 dist/
 
 | 文件 | 管什么 |
 | --- | --- |
-| `src/content/projects.ts` | 所有项目。列表、精选、详情弹窗、履历里的获奖记录都从这里生成 |
+| `src/content/projects.ts` | 所有项目。列表、精选、详情弹窗都从这里生成 |
 | `src/content/profile.ts` | 名字、首页一句话、自述、教育、技能、在玩的游戏、联系方式、照片 |
 | `src/content/labels.ts` | 项目类型 / 状态的中文标签 |
 | `src/content/types.ts` | 上面两份数据的类型定义，每个字段都有注释 |
@@ -50,7 +50,7 @@ npm run preview   # 本地预览 dist/
      kind: 'jam',                     // indie | jam | coursework | prototype
      status: 'shipped',               // in-dev | shipped | shelved
      event: 'Some Game Jam 2026',     // 可选
-     award: '最佳玩法',               // 可选，填了会自动进「履历 · 获奖」
+     award: '最佳玩法',               // 可选，精选卡片和项目列表会标出来
      role: '主程',
      team: '三人',
      tagline: '一句话说清楚这个游戏。',

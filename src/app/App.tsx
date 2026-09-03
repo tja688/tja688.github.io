@@ -48,7 +48,7 @@ export const App = () => {
         <Hero />
         <FeaturedWork onOpenProject={openProject} />
         <ProjectArchive onOpenProject={openProject} />
-        <About onOpenProject={openProject} />
+        <About />
         <Contact />
       </main>
       <Footer />
