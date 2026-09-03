@@ -45,7 +45,7 @@ export const App = () => {
     <div className="relative min-h-dvh overflow-x-clip bg-bg">
       <SiteNav />
       <main>
-        <Hero onOpenProject={openProject} />
+        <Hero />
         <FeaturedWork onOpenProject={openProject} />
         <ProjectArchive onOpenProject={openProject} />
         <About onOpenProject={openProject} />

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { profile } from '../content/profile';
 
 const links = [
   { href: '#work', label: '作品' },
@@ -23,10 +22,7 @@ export function SiteNav() {
         scrolled ? 'border-b border-line bg-bg/80 backdrop-blur-md' : 'border-b border-transparent'
       }`}
     >
-      <nav className="container-x flex h-16 items-center justify-between" aria-label="主导航">
-        <a href="#top" className="font-display-wide text-[15px] text-ink transition-colors hover:text-accent-ink">
-          {profile.handle}
-        </a>
+      <nav className="container-x flex h-16 items-center justify-end" aria-label="主导航">
         <ul className="flex items-center gap-6 text-sm text-ink-muted md:gap-8">
           {links.map((l) => (
             <li key={l.href}>

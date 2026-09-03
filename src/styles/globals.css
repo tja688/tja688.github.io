@@ -7,7 +7,7 @@
 @import '@fontsource/noto-serif-sc/700.css';
 
 @theme {
-  /* 暖炭底 + 骨白字 + 群青做唯一的强调色（只给物理晶格、链接与少量标记） */
+  /* 暖炭底 + 骨白字 + 群青做唯一的强调色（链接、获奖标记与焦点环） */
   --color-bg: #18171b;
   --color-surface: #201f24;
   --color-surface-2: #2a292f;

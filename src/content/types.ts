@@ -78,13 +78,19 @@ export interface Photo {
 export interface Profile {
   name: string;
   handle: string;
-  /** 首页一句话定位 */
+  /** 首页一句定位 / 题记 */
   headline: string;
   /** 首页引导语（第二段，短） */
   lead: string;
   /** 「关于我」里的自述段落 */
   bio: string[];
-  /** 当前状态：首页底部的一行 */
+  /** 首页右侧可切换的两张肖像（冯诺依曼派 / 图灵派） */
+  portrait: {
+    vonNeumann: { src: string; alt: string };
+    turing: { src: string; alt: string };
+    caption: string;
+  };
+  /** 当前在做的事（内容保留，供别处取用） */
   now: { label: string; text: string; projectSlug?: string };
   education: Education[];
   /** 技能按诚实程度分层 */

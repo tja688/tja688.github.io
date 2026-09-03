@@ -238,6 +238,7 @@ export const projects: Project[] = [
       { kind: 'video', url: 'https://youtu.be/CNH5Yst5X8M', label: '宣传片 · YouTube' },
     ],
     tags: ['Unity', '软体物理', 'TA'],
+    featured: true,
   },
   {
     slug: 'camera-summon',
