@@ -58,7 +58,7 @@ export const profile: Profile = {
     { label: '最近在玩', value: '节奏地牢' },
   ],
   contacts: [
-    { label: '微信', value: 'jintang1212' },
+    { label: '微信', value: 'tangjin1212' },
     { label: 'QQ', value: '315635975' },
     { label: 'Steam 好友代码', value: '875775160' },
     { label: 'itch.io', value: 'tja688.itch.io', href: 'https://tja688.itch.io' },
