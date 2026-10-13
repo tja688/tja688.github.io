@@ -1,0 +1,81 @@
+{
+  "source": "theme.json audio.cues",
+  "sampleRate": 44100,
+  "channels": 2,
+  "format": "PCM16 WAV",
+  "renderer": "Bounded additive synthesis, exponential pitch and decay",
+  "files": [
+    {
+      "file": "hover.wav",
+      "bytes": 18568,
+      "duration": 0.10501133786848073,
+      "peak": 0.023538651893758977,
+      "rms": 0.0031509986100300338,
+      "sha256": "8c5f62e80c3968e445f5490fde59be107ee7cd7db3c8a87f1f3bc004bedb3005"
+    },
+    {
+      "file": "select.wav",
+      "bytes": 24744,
+      "duration": 0.14002267573696145,
+      "peak": 0.023053159469893825,
+      "rms": 0.005099020199345635,
+      "sha256": "84af30fd03723eb0f64e18e2fa540373fbaf9cd91aae5534bdf2b5f2224a53d8"
+    },
+    {
+      "file": "confirm.wav",
+      "bytes": 31796,
+      "duration": 0.18,
+      "peak": 0.061979790615692955,
+      "rms": 0.008720187974139391,
+      "sha256": "ac32a458ea53f18dd2ac0af05a5ec98089ec7a34ef68a5a6b7c2d6d233be1680"
+    },
+    {
+      "file": "invalid.wav",
+      "bytes": 37088,
+      "duration": 0.21,
+      "peak": 0.052590977744106183,
+      "rms": 0.008012798969846548,
+      "sha256": "76c006731452144dd73c0d5bb4a3dc69147db15864cf771035af50b385636e7e"
+    },
+    {
+      "file": "impact.wav",
+      "bytes": 40616,
+      "duration": 0.23,
+      "peak": 0.08790761538684223,
+      "rms": 0.012020142173934378,
+      "sha256": "186afa1d9df57a056b3a043cf0667fb833b227785b3119e65f15a7eebccc42e7"
+    },
+    {
+      "file": "collect.wav",
+      "bytes": 45028,
+      "duration": 0.25501133786848074,
+      "peak": 0.062337258491911754,
+      "rms": 0.010444793300989949,
+      "sha256": "58060d4cb478ef5261e5d928dbf9f688576b12cffffdb6f33c3bd07cf3a62ed6"
+    },
+    {
+      "file": "danger.wav",
+      "bytes": 45908,
+      "duration": 0.26,
+      "peak": 0.03527189381170745,
+      "rms": 0.008208219340509377,
+      "sha256": "2747e261c5e35b88618b313caf1e312f68c55a54fd9c19523fc7a55170ff3027"
+    },
+    {
+      "file": "victory.wav",
+      "bytes": 98832,
+      "duration": 0.5600226757369614,
+      "peak": 0.06638044648306328,
+      "rms": 0.010950357351910286,
+      "sha256": "c75e13832b02123a85774abb5f14af472a8cc44ac6ef77ac3999ad1d3f9ab2d3"
+    },
+    {
+      "file": "defeat.wav",
+      "bytes": 102360,
+      "duration": 0.5800226757369614,
+      "peak": 0.06651399883306827,
+      "rms": 0.011847674276793984,
+      "sha256": "f701a3c590cf48a19f2203f06e63eb11b564bd07fab619f9ee42139dafd92588"
+    }
+  ]
+}

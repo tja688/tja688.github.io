@@ -1,0 +1,4 @@
+interface:
+  display_name: "像素墨色游戏表现"
+  short_description: "把策划案变成灰阶像素、点彩反馈的二维游戏，包含字体与音频"
+  default_prompt: "使用 $pixel-ink-game-art，把下面的游戏策划案实现为可玩的二维游戏，并沿用技能定义的画面、交互、字体与音频语言。"

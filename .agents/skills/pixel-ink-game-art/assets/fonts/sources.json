@@ -1,0 +1,35 @@
+{
+  "upstreamCommit": "66928797f271fed5ee428544e7229685e2d90127",
+  "files": [
+    {
+      "bytes": 32220,
+      "file": "Silkscreen-Regular.ttf",
+      "sha256": "c845473330b94c2079ce9af01c51ac8ba2d99c24f4d14c039843bbb8e642ebd8",
+      "url": "https://raw.githubusercontent.com/google/fonts/66928797f271fed5ee428544e7229685e2d90127/ofl/silkscreen/Silkscreen-Regular.ttf"
+    },
+    {
+      "bytes": 30632,
+      "file": "Silkscreen-Bold.ttf",
+      "sha256": "768476aa712d4f5c3e18d3bce80f980a8bd3f72b7094d22ec5e768df3acfed61",
+      "url": "https://raw.githubusercontent.com/google/fonts/66928797f271fed5ee428544e7229685e2d90127/ofl/silkscreen/Silkscreen-Bold.ttf"
+    },
+    {
+      "bytes": 4394,
+      "file": "Silkscreen-OFL.txt",
+      "sha256": "86c5e9c9382cdcc5948704fdfe60f2aa164a719746931219a42736ecd9cefbd3",
+      "url": "https://raw.githubusercontent.com/google/fonts/66928797f271fed5ee428544e7229685e2d90127/ofl/silkscreen/OFL.txt"
+    },
+    {
+      "bytes": 17772300,
+      "file": "NotoSansSC.ttf",
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "url": "https://raw.githubusercontent.com/google/fonts/66928797f271fed5ee428544e7229685e2d90127/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf"
+    },
+    {
+      "bytes": 4388,
+      "file": "NotoSansSC-OFL.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "url": "https://raw.githubusercontent.com/google/fonts/66928797f271fed5ee428544e7229685e2d90127/ofl/notosanssc/OFL.txt"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Ink Pixel';
+  src: url('./fonts/Silkscreen-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ink Pixel';
+  src: url('./fonts/Silkscreen-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ink CJK';
+  src: url('./fonts/NotoSansSC.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+.ink-surface {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--ink-void);
+  position: relative;
+}
+.ink-surface canvas {
+  display: block;
+  image-rendering: pixelated;
+  touch-action: none;
+}
+.ink-ui {
+  color: var(--ink-ink);
+  font-family: 'Ink CJK', system-ui, sans-serif;
+  font-size: var(--ink-body-size);
+  line-height: var(--ink-line-height);
+  font-synthesis: none;
+}
+.ink-display {
+  font-family: 'Ink Pixel', 'Ink CJK', sans-serif;
+  letter-spacing: 0.02em;
+}
+.ink-panel {
+  border: 1px solid var(--ink-edge);
+  background: var(--ink-void);
+  box-shadow: 3px 3px var(--ink-void);
+  padding: 16px;
+}
+.ink-button {
+  appearance: none;
+  border: 1px solid var(--ink-edge);
+  border-radius: 0;
+  color: var(--ink-ink);
+  background: var(--ink-ground);
+  padding: 10px 16px;
+  font: inherit;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    border-color 100ms,
+    background 100ms,
+    transform 100ms;
+}
+.ink-button:hover {
+  border-color: var(--ink-ink);
+  background: var(--ink-plane);
+  transform: translateY(-1px);
+}
+.ink-button:focus-visible {
+  outline: 2px solid var(--ink-action);
+  outline-offset: 3px;
+}
+.ink-button[aria-pressed='true'] {
+  color: var(--ink-action);
+  border-color: var(--ink-action);
+}
+.ink-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+.ink-button--primary {
+  background: var(--ink-action);
+  color: var(--ink-void);
+  border-color: var(--ink-action);
+}
+.ink-button--primary:hover {
+  background: var(--ink-ink);
+  color: var(--ink-void);
+}
+.ink-label {
+  font-size: var(--ink-label-size);
+  color: var(--ink-muted);
+}
+.ink-caption {
+  font-size: var(--ink-caption-size);
+  color: var(--ink-muted);
+}
+.ink-danger {
+  color: var(--ink-danger);
+}
+.ink-reward {
+  color: var(--ink-reward);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-button {
+    transition: none;
+    transform: none;
+  }
+}

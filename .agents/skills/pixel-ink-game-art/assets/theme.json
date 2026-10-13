@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "style": "pixel-ink",
+  "palette": {
+    "void": "#09090a",
+    "ground": "#1c1c20",
+    "plane": "#2b2b30",
+    "edge": "#4a4a51",
+    "muted": "#8c8c93",
+    "ink": "#f0efe8",
+    "red": "#ff3d5a",
+    "cyan": "#35f0ff",
+    "gold": "#ffcf3a",
+    "violet": "#b56bff"
+  },
+  "roles": {
+    "action": "cyan",
+    "danger": "red",
+    "reward": "gold",
+    "special": "violet"
+  },
+  "world": {
+    "logicalHeight": 270,
+    "minWidth": 160,
+    "maxWidth": 640,
+    "tile": 16,
+    "spriteSmall": 16,
+    "spriteLarge": 32,
+    "frameRate": 60,
+    "seed": 17,
+    "ambientParticles": 32,
+    "maxTransientParticles": 160
+  },
+  "typography": {
+    "bodyPx": 15,
+    "labelPx": 12,
+    "captionPx": 10,
+    "titlePx": 48,
+    "bodyLineHeight": 1.7,
+    "latinFamily": "Ink Pixel",
+    "cjkFamily": "Ink CJK",
+    "fontFiles": [
+      "Silkscreen-Regular.ttf",
+      "Silkscreen-Bold.ttf",
+      "NotoSansSC.ttf"
+    ]
+  },
+  "motion": {
+    "hoverMs": 100,
+    "selectMs": 140,
+    "arrivalMs": 300,
+    "impactMs": 180,
+    "impactFlashMs": 45,
+    "removeMs": 220,
+    "burstMs": 450,
+    "floatMs": 650,
+    "transitionMs": 280,
+    "idlePeriodMs": 3600,
+    "idleAmplitudePx": 1,
+    "shakePx": 1,
+    "shakeMs": 110,
+    "burstCount": 14,
+    "burstDistancePx": 24,
+    "maxConcurrentBursts": 6
+  },
+  "audio": {
+    "master": 0.7,
+    "music": 0.4,
+    "effects": 0.65,
+    "maxVoices": 12,
+    "hoverCooldownMs": 110,
+    "impactCooldownMs": 35,
+    "ambienceGain": 0.035,
+    "moods": {
+      "mysterious": { "frequencies": [55, 82.41, 110.13], "cutoff": 340 },
+      "warm": { "frequencies": [65.41, 82.41, 98], "cutoff": 420 },
+      "urgent": { "frequencies": [55, 58.27, 82.41], "cutoff": 280 }
+    },
+    "cues": {
+      "hover": [
+        {
+          "wave": "triangle",
+          "frequency": 330,
+          "end": 440,
+          "duration": 0.045,
+          "gain": 0.035
+        }
+      ],
+      "select": [
+        {
+          "wave": "square",
+          "frequency": 330,
+          "end": 660,
+          "duration": 0.08,
+          "gain": 0.03
+        }
+      ],
+      "confirm": [
+        {
+          "wave": "triangle",
+          "frequency": 440,
+          "end": 660,
+          "duration": 0.12,
+          "gain": 0.09
+        }
+      ],
+      "invalid": [
+        {
+          "wave": "triangle",
+          "frequency": 160,
+          "end": 95,
+          "duration": 0.15,
+          "gain": 0.08
+        }
+      ],
+      "impact": [
+        {
+          "wave": "triangle",
+          "frequency": 180,
+          "end": 48,
+          "duration": 0.17,
+          "gain": 0.12
+        },
+        {
+          "wave": "square",
+          "frequency": 900,
+          "end": 450,
+          "duration": 0.035,
+          "gain": 0.025
+        }
+      ],
+      "collect": [
+        {
+          "wave": "sine",
+          "frequency": 660,
+          "end": 880,
+          "duration": 0.12,
+          "gain": 0.09
+        },
+        {
+          "wave": "triangle",
+          "frequency": 990,
+          "end": 1320,
+          "duration": 0.14,
+          "gain": 0.06,
+          "delay": 0.055
+        }
+      ],
+      "danger": [
+        {
+          "wave": "square",
+          "frequency": 220,
+          "end": 110,
+          "duration": 0.2,
+          "gain": 0.045
+        }
+      ],
+      "victory": [
+        {
+          "wave": "triangle",
+          "frequency": 261.63,
+          "end": 261.63,
+          "duration": 0.2,
+          "gain": 0.1
+        },
+        {
+          "wave": "triangle",
+          "frequency": 329.63,
+          "end": 329.63,
+          "duration": 0.23,
+          "gain": 0.08,
+          "delay": 0.09
+        },
+        {
+          "wave": "triangle",
+          "frequency": 392,
+          "end": 523.25,
+          "duration": 0.32,
+          "gain": 0.07,
+          "delay": 0.18
+        }
+      ],
+      "defeat": [
+        {
+          "wave": "sine",
+          "frequency": 164.81,
+          "end": 110,
+          "duration": 0.3,
+          "gain": 0.1
+        },
+        {
+          "wave": "triangle",
+          "frequency": 130.81,
+          "end": 65.41,
+          "duration": 0.4,
+          "gain": 0.07,
+          "delay": 0.12
+        }
+      ]
+    }
+  }
+}
