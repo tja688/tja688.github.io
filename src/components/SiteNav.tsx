@@ -1,38 +1,35 @@
-import { useEffect, useState } from 'react';
-
-const links = [
-  { href: '#work', label: '作品' },
-  { href: '#about', label: '履历' },
-  { href: '#contact', label: '联系' },
-];
-
 export function SiteNav() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-40 transition-[background-color,border-color,backdrop-filter] duration-500 ease-expo ${
-        scrolled ? 'border-b border-line bg-bg/80 backdrop-blur-md' : 'border-b border-transparent'
-      }`}
-    >
-      <nav className="container-x flex h-16 items-center justify-end" aria-label="主导航">
-        <ul className="flex items-center gap-6 text-sm text-ink-muted md:gap-8">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="transition-colors duration-300 hover:text-ink">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <header className="site-header">
+      <div className="wrap nav-inner">
+        <a href="#" className="brand" aria-label="小游档案首页">
+          <svg
+            viewBox="0 0 24 24"
+            width="32"
+            height="32"
+            fill="currentColor"
+            shapeRendering="crispEdges"
+            aria-hidden="true"
+          >
+            <path d="M4 3h16v2h2v14h-2v2H4v-2H2V5h2zm2 4v10h12V7zm2 2h2v2h2v2h-2v2H8v-2H6v-2h2zm7 2h2v2h-2z" />
+          </svg>
+          <span>
+            小游档案<small>SMALL GAME ARCHIVE</small>
+          </span>
+        </a>
+        <nav aria-label="主导航">
+          <a href="#selected">精选作品</a>
+          <a href="#games">
+            全部游戏{" "}
+            <span className="nav-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </nav>
+        <span className="nav-stamp">
+          <span className="signal" /> PRESS START
+        </span>
+      </div>
     </header>
   );
 }

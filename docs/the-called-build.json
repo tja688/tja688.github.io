@@ -1,0 +1,124 @@
+{
+  "repository": "https://github.com/tja688/The-Called",
+  "commit": "c145b17a566c105559235bad4a50b0b68f41242c",
+  "importedAt": "2026-10-13T08:05:50.941Z",
+  "playablePath": "/play/the-called/",
+  "bytes": 4274235,
+  "files": [
+    {
+      "path": "assets/index-DhevJgV4.css",
+      "bytes": 47895,
+      "sha256": "33dbff515174ad9541d2b16798ad20dbf7f07055e085544b0808567dcce5b17d"
+    },
+    {
+      "path": "assets/index-DL4F0s8B.js",
+      "bytes": 263492,
+      "sha256": "ca33f96853e1ebc49b332a280ec8441dbb6b624534c6b4eb7eb8f188b5b1b0e7"
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 333,
+      "sha256": "ed460263fad578a59094f750c5003953a649deb4d0971e17252df557b9de059c"
+    },
+    {
+      "path": "index.html",
+      "bytes": 650,
+      "sha256": "4426cd2eaee693b2c61989fce7726f099c68bb40ee1d95c22d0d65578fe83136"
+    },
+    {
+      "path": "kernel/_framework/dotnet.boot.js",
+      "bytes": 5121,
+      "sha256": "cdc1d4dd574afae2bc64b7a69d7056c6794d36f6327a2c1e7f347f203ced390e"
+    },
+    {
+      "path": "kernel/_framework/dotnet.js",
+      "bytes": 37898,
+      "sha256": "ba72088a45591210f9a08fec223b0f848a0a4d3245026ae9479353596c7fa89d"
+    },
+    {
+      "path": "kernel/_framework/dotnet.js.map",
+      "bytes": 51818,
+      "sha256": "284c68abc54f86607c605f4032b060265e438dcd067140834596a6af65df5c36"
+    },
+    {
+      "path": "kernel/_framework/dotnet.native.js",
+      "bytes": 220764,
+      "sha256": "4436f777c5d660348dcd2b3eb7c92132349c818e299be1f136bbaf1f9ebf50da"
+    },
+    {
+      "path": "kernel/_framework/dotnet.native.wasm",
+      "bytes": 1484247,
+      "sha256": "e358ac531f7397c3f8dd9e3bfe86c927a91e91d13465b1cebfedbe67050ba6b7"
+    },
+    {
+      "path": "kernel/_framework/dotnet.runtime.js",
+      "bytes": 198480,
+      "sha256": "41b9eaad9187b46abbc2e752d7bfc06043e91fd264a61aecc959650fa24799db"
+    },
+    {
+      "path": "kernel/_framework/dotnet.runtime.js.map",
+      "bytes": 276757,
+      "sha256": "b321bd217887402b736a70395cbdb67eb01825aa78db7f8c637ef10e907ad3a7"
+    },
+    {
+      "path": "kernel/_framework/Pcd.Kernel.wasm",
+      "bytes": 141077,
+      "sha256": "85dd5c30fd0b8aed485547557046601d2d1e30417af3efb6099d13aae4021f97"
+    },
+    {
+      "path": "kernel/_framework/Pcd.PlayHost.wasm",
+      "bytes": 79125,
+      "sha256": "141f1d9e79dd7184d8ebbef362a342a6f8fa7b7245cd49e86739ee4330e6f639"
+    },
+    {
+      "path": "kernel/_framework/Pcd.Wasm.wasm",
+      "bytes": 6421,
+      "sha256": "3ea2f155c04124119fee3be6dec12ff55205ce3a72ee2abcfcf73bb088450941"
+    },
+    {
+      "path": "kernel/_framework/System.Collections.Concurrent.wasm",
+      "bytes": 15125,
+      "sha256": "be8defa23857ff7d38aabe0010d55764e78813d92e0dff357f9688ab9942c3b5"
+    },
+    {
+      "path": "kernel/_framework/System.Collections.wasm",
+      "bytes": 7445,
+      "sha256": "67d45e35dd9efff7d69c370cffb768bae76d9c0e47f809ba17d5710792adf890"
+    },
+    {
+      "path": "kernel/_framework/System.IO.Pipelines.wasm",
+      "bytes": 5909,
+      "sha256": "7d9a41d8d166a0325702a9c2614e3e5c02a465b139d5588cdcab10f9bc6a54ea"
+    },
+    {
+      "path": "kernel/_framework/System.Memory.wasm",
+      "bytes": 14101,
+      "sha256": "c0b9741b75f9c09654dd439cb02ae3216319575772a66aebda84494386ab4a6c"
+    },
+    {
+      "path": "kernel/_framework/System.Private.CoreLib.wasm",
+      "bytes": 1111317,
+      "sha256": "0f409f6daf9a944b97c40b4a9767d9d79edb4d82330330cf1e0cff4037f7643b"
+    },
+    {
+      "path": "kernel/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+      "bytes": 40213,
+      "sha256": "d79ff1ebdf4f4fe814b69242fb9ec4fb13165d1cb2c999ac13ac6f9ebc7dac34"
+    },
+    {
+      "path": "kernel/_framework/System.Security.Cryptography.wasm",
+      "bytes": 20757,
+      "sha256": "965387719827c93c756024014d52b36109c3ee4d13c4cef148ef17617eeb5bfc"
+    },
+    {
+      "path": "kernel/_framework/System.Text.Encodings.Web.wasm",
+      "bytes": 28949,
+      "sha256": "3f26ae01f209b8bb9ba148421bd54e5e72733da0a69bb935bfecc93c5d1929b3"
+    },
+    {
+      "path": "kernel/_framework/System.Text.Json.wasm",
+      "bytes": 216341,
+      "sha256": "e8b8875ce530b13c59736c986aa49cc90ca4216029b7410dad7fe4156c3fb4fd"
+    }
+  ]
+}

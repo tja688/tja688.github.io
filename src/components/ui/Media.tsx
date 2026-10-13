@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import type { MediaItem } from '../../content/types';
+import { useEffect, useRef } from "react";
+import type { MediaItem } from "../../content/types";
 
 interface Props {
   item: MediaItem;
@@ -15,19 +15,32 @@ interface Props {
  * 渲染一段媒体。视频只在进入视口时加载并播放，离开视口暂停，
  * 这样首页十来个循环视频不会同时争带宽。
  */
-export function Media({ item, className, autoplay = true, priority = false }: Props) {
-  if (item.kind === 'image') {
+export function Media({
+  item,
+  className,
+  autoplay = true,
+  priority = false,
+}: Props) {
+  if (item.kind === "image") {
     return (
       <img
         src={item.src}
         alt={item.alt}
-        loading={priority ? 'eager' : 'lazy'}
+        loading={priority ? "eager" : "lazy"}
         decoding="async"
         className={className}
       />
     );
   }
-  return <LoopVideo src={item.src} poster={item.poster} alt={item.alt} className={className} autoplay={autoplay} />;
+  return (
+    <LoopVideo
+      src={item.src}
+      poster={item.poster}
+      alt={item.alt}
+      className={className}
+      autoplay={autoplay}
+    />
+  );
 }
 
 interface VideoProps {
@@ -44,22 +57,33 @@ function LoopVideo({ src, poster, alt, className, autoplay }: VideoProps) {
   useEffect(() => {
     const video = ref.current;
     if (!video || !autoplay) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let visible = false;
+    const updatePlayback = () => {
+      if (preference.matches || document.hidden || !visible) {
+        video.pause();
+        return;
+      }
+      if (!video.getAttribute("src")) video.src = src;
+      void video.play().catch(() => undefined);
+    };
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!video.src) video.src = src;
-          void video.play().catch(() => undefined);
-        } else {
-          video.pause();
-        }
+        visible = entry.isIntersecting;
+        updatePlayback();
       },
-      { rootMargin: '200px 0px', threshold: 0.01 },
+      { rootMargin: "200px 0px", threshold: 0.01 },
     );
     io.observe(video);
-    return () => io.disconnect();
+    preference.addEventListener("change", updatePlayback);
+    document.addEventListener("visibilitychange", updatePlayback);
+    return () => {
+      io.disconnect();
+      preference.removeEventListener("change", updatePlayback);
+      document.removeEventListener("visibilitychange", updatePlayback);
+      video.pause();
+    };
   }, [src, autoplay]);
 
   return (

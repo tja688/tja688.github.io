@@ -15,3 +15,6 @@
 
 # 站点实际引用的媒体走普通 git：GitHub Pages 构建时 actions/checkout 不拉取 LFS 对象
 public/media/** !filter !diff !merge -text
+public/fonts/** !filter !diff !merge -text
+# Imported browser build: keep exact bytes and review its source repository / hash receipt.
+public/play/** !filter -diff -merge -text

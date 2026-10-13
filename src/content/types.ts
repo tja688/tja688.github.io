@@ -6,21 +6,22 @@
 
 /** 一段媒体：循环视频（由 GIF 转成的 mp4）或静态图 */
 export type MediaItem =
-  | { kind: 'video'; src: string; poster: string; alt: string }
-  | { kind: 'image'; src: string; alt: string };
+  | { kind: "video"; src: string; poster: string; alt: string }
+  | { kind: "image"; src: string; alt: string };
 
 /** 项目对外链接 */
 export type ProjectLink =
+  | { kind: "play"; url: string; label: string }
   /** 试玩包下载（网盘 + 提取码），提取码会在详情页里提供一键复制 */
-  | { kind: 'download'; url: string; code?: string; label?: string }
+  | { kind: "download"; url: string; code?: string; label?: string }
   /** 演示视频（B 站 / YouTube） */
-  | { kind: 'video'; url: string; label: string }
+  | { kind: "video"; url: string; label: string }
   /** 其他页面（Steam / itch.io / 仓库） */
-  | { kind: 'page'; url: string; label: string };
+  | { kind: "page"; url: string; label: string };
 
-export type ProjectKind = 'indie' | 'jam' | 'coursework' | 'prototype';
+export type ProjectKind = "indie" | "jam" | "coursework" | "prototype";
 
-export type ProjectStatus = 'in-dev' | 'shipped' | 'shelved';
+export type ProjectStatus = "in-dev" | "shipped" | "shelved" | "unreleased";
 
 export interface Project {
   /** URL 友好的唯一 id，同时也是 `public/media/<slug>/` 的目录名 */
@@ -54,55 +55,4 @@ export interface Project {
   tags?: string[];
   /** 是否进入首页精选（建议 2–4 个） */
   featured?: boolean;
-}
-
-export interface Education {
-  school: string;
-  degree: string;
-  detail?: string[];
-}
-
-export interface Work {
-  org: string;
-  role: string;
-  detail?: string[];
-}
-
-export interface Contact {
-  label: string;
-  value: string;
-  /** 有 href 时渲染为外链，否则渲染为可复制的字段 */
-  href?: string;
-}
-
-export interface Photo {
-  src: string;
-  alt: string;
-  caption: string;
-}
-
-export interface Profile {
-  name: string;
-  handle: string;
-  /** 首页一句定位 / 题记 */
-  headline: string;
-  /** 首页引导语（第二段，短） */
-  lead: string;
-  /** 「关于我」里的自述段落 */
-  bio: string[];
-  /** 首页右侧可切换的两张肖像（冯诺依曼派 / 图灵派） */
-  portrait: {
-    vonNeumann: { src: string; alt: string };
-    turing: { src: string; alt: string };
-    caption: string;
-  };
-  /** 当前在做的事（内容保留，供别处取用） */
-  now: { label: string; text: string; projectSlug?: string };
-  education: Education[];
-  work: Work[];
-  /** 技能按诚实程度分层 */
-  skills: { level: string; items: string[] }[];
-  plays: { label: string; value: string }[];
-  contacts: Contact[];
-  photos: Photo[];
 }

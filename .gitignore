@@ -4,3 +4,5 @@ desktop.ini
 .vscode/
 node_modules/
 dist/
+.playwright-cli/
+artifacts/

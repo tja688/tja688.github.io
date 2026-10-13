@@ -1,77 +1,149 @@
-import { projects } from '../content/projects';
-import { coverImage, kindLabel, statusLabel } from '../content/labels';
-import { Arrow } from './ui/Button';
-import { Reveal } from './ui/Reveal';
-import { SectionHeader } from './ui/SectionHeader';
-import { AwardMark } from './FeaturedWork';
+import { useState } from "react";
+import { projects } from "../content/projects";
+import { coverImage, statusLabel, kindLabel } from "../content/labels";
+import type { ProjectKind } from "../content/types";
 
-interface Props {
+const filters: { id: "all" | ProjectKind; label: string }[] = [
+  { id: "all", label: "全部作品" },
+  { id: "indie", label: "独立项目" },
+  { id: "jam", label: "Game Jam" },
+  { id: "prototype", label: "练手原型" },
+  { id: "coursework", label: "技术实验" },
+];
+
+export function ProjectArchive({
+  onOpenProject,
+}: {
   onOpenProject: (slug: string) => void;
-}
-
-export function ProjectArchive({ onOpenProject }: Props) {
-  const years = projects.map((p) => p.year).filter((y) => /^\d{4}/.test(y));
-  const span = years.length ? `${years[years.length - 1].slice(0, 4)} – ${years[0].slice(0, 4)}` : '';
-
+}) {
+  const [filter, setFilter] = useState<"all" | ProjectKind>("all");
+  const [query, setQuery] = useState("");
+  const visible = projects.filter(
+    (p) =>
+      (filter === "all" || p.kind === filter) &&
+      `${p.title} ${p.tagline} ${p.tags?.join(" ") ?? ""}`
+        .toLocaleLowerCase()
+        .includes(query.trim().toLocaleLowerCase()),
+  );
   return (
-    <section id="archive" className="container-x pb-24 md:pb-36">
-      <Reveal>
-        <SectionHeader eyebrow="all projects" title="全部项目" aside={`${span} · ${projects.length} 个`} />
-      </Reveal>
-
-      <Reveal>
-        <ul className="border-y border-line">
-          {projects.map((p) => (
-            <li key={p.slug} className="border-b border-line last:border-b-0">
+    <section
+      id="games"
+      className="archive-section"
+      aria-labelledby="archive-title"
+    >
+      <div className="wrap">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">02 / THE COLLECTION</p>
+            <h2 id="archive-title">
+              作品存档<span className="heading-dot">.</span>
+            </h2>
+          </div>
+          <p>
+            做出来的东西，和留下来的尝试。
+            <br />
+            选一个，看看它的玩法和故事。
+          </p>
+        </div>
+        <div className="archive-toolbar">
+          <div className="filters" aria-label="作品分类">
+            {filters.map((f) => (
               <button
-                type="button"
-                onClick={() => onOpenProject(p.slug)}
-                className="group -mx-3 grid w-[calc(100%+1.5rem)] grid-cols-[3.25rem_3.5rem_minmax(0,1fr)_auto] items-center gap-x-4 rounded-xl px-3 py-4 text-left transition-colors duration-300 ease-expo hover:bg-surface md:grid-cols-[3.5rem_3.5rem_minmax(0,2.2fr)_minmax(0,1.6fr)_minmax(0,1.1fr)_auto] md:gap-x-6"
+                key={f.id}
+                onClick={() => setFilter(f.id)}
+                aria-pressed={f.id === filter}
               >
-                <span className="font-mono text-[13px] text-ink-muted tabular-nums">{p.year}</span>
-
-                <span className="media-frame h-14 w-14 rounded-lg">
-                  <img
-                    src={coverImage(p.cover)}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-expo group-hover:scale-105"
-                  />
-                </span>
-
-                <span className="min-w-0">
-                  <span className="flex flex-wrap items-baseline gap-x-3">
-                    <span className="font-serif text-[1.15rem] font-bold tracking-tight text-ink">{p.title}</span>
-                    {p.latinTitle && p.latinTitle !== p.title && (
-                      <span className="font-display-wide text-[13px] text-ink-muted">{p.latinTitle}</span>
-                    )}
-                  </span>
-                  <span className="mt-0.5 block truncate text-sm text-ink-muted">{p.tagline}</span>
-                </span>
-
-                <span className="hidden min-w-0 text-sm leading-snug text-ink-muted md:block">
-                  <span className="block truncate">{p.event ?? kindLabel[p.kind]}</span>
-                  <span className="block truncate text-ink-faint">{p.role}</span>
-                </span>
-
-                <span className="hidden min-w-0 text-sm leading-snug md:block">
-                  {p.award ? (
-                    <span className="inline-flex items-start gap-1.5 text-accent-ink">
-                      <AwardMark />
-                      <span className="line-clamp-2">{p.award}</span>
-                    </span>
-                  ) : (
-                    <span className="text-ink-faint">{statusLabel[p.status]}</span>
-                  )}
-                </span>
-
-                <Arrow className="text-ink-faint transition-[color,transform] duration-300 ease-expo group-hover:translate-x-0.5 group-hover:text-ink" />
+                {f.label}
+                <small>
+                  {f.id === "all"
+                    ? projects.length
+                    : projects.filter((p) => p.kind === f.id).length}
+                </small>
               </button>
-            </li>
+            ))}
+          </div>
+          <label className="search">
+            <span aria-hidden="true">⌕</span>
+            <span className="sr-only">搜索作品或玩法</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="搜索作品 / 玩法"
+              type="search"
+            />
+          </label>
+        </div>
+        <div className="archive-count" role="status">
+          {String(visible.length).padStart(2, "0")} 个作品{" "}
+          <span>点击封面，打开档案</span>
+        </div>
+        <div className="archive-grid">
+          {visible.map((p) => (
+            <article className="archive-card" key={p.slug}>
+              <button
+                className="archive-image"
+                onClick={() => onOpenProject(p.slug)}
+                aria-label={`查看 ${p.title} 作品详情`}
+              >
+                <img
+                  src={coverImage(p.cover)}
+                  alt={p.cover.alt}
+                  loading="lazy"
+                />
+                <span className={`status-label status-${p.status}`}>
+                  <span />
+                  {statusLabel[p.status]}
+                </span>
+                <span className="image-open" aria-hidden="true">
+                  ↗
+                </span>
+              </button>
+              <div className="archive-text">
+                <p className="eyebrow">
+                  {p.year} / {kindLabel[p.kind]}
+                </p>
+                <button
+                  className="title-button"
+                  onClick={() => onOpenProject(p.slug)}
+                >
+                  <h3>{p.title}</h3>
+                </button>
+                <p>{p.tagline}</p>
+                <div className="archive-meta">
+                  <span>{p.tags?.slice(0, 2).join(" · ")}</span>
+                  <span>
+                    {p.links.some((l) => l.kind === "play")
+                      ? "可在线玩 ↗"
+                      : p.links.some((l) => l.kind === "download")
+                        ? "有试玩包 ↗"
+                        : "查看档案 ↗"}
+                  </span>
+                </div>
+              </div>
+            </article>
           ))}
-        </ul>
-      </Reveal>
+        </div>
+        {visible.length === 0 && (
+          <div className="empty-state">
+            <span aria-hidden="true">[ ? ]</span>
+            <h3>没有找到这份档案</h3>
+            <p>换个关键词，或者回到全部作品。</p>
+            <button
+              className="button"
+              onClick={() => {
+                setQuery("");
+                setFilter("all");
+              }}
+            >
+              重置筛选
+            </button>
+          </div>
+        )}
+        <div className="archive-end">
+          <span>END OF COLLECTION</span>
+          <span>{projects.length} SMALL WORLDS / MORE TO COME</span>
+        </div>
+      </div>
     </section>
   );
 }
