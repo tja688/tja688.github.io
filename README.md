@@ -2,7 +2,7 @@
 
 作品优先的独立游戏主页。使用像素墨色的灰阶材质、方角边框、少量荧绿交互提示；作品画面保留原本的美术风格。
 
-Vite + React + TypeScript，部署到 GitHub Pages。推送 `main` 后自动构建发布。
+Vite + React + TypeScript，部署到 GitHub Pages。推送 `main` 后自动构建发布。仓库 Pages 设置的 Source 使用 GitHub Actions，不能使用 `main / root` 的分支发布，否则会把源码入口直接发到线上。
 
 ## 本地运行
 

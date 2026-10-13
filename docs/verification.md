@@ -33,3 +33,7 @@
 见 `README.md` 的浏览器验收命令与 `scripts/verify-site.js`。游戏构建导入脚本为 `scripts/import-the-called.mjs`，版本来源和逐文件 SHA-256 为 `docs/the-called-build.json`。
 
 这次验证覆盖主页和游戏托管接入，不代表对 The Called 全部卡牌规则或难度完成回归。原试玩下载平台的下载权限、网盘可用性未做完整下载验证。
+
+## 发布设置修复
+
+线上复查发现原 Pages 发布类型是 `legacy`，会由分支根目录的自动任务覆盖 Actions 产物。已把仓库 Pages 发布类型改为 `workflow`，继续使用 `.github/workflows/deploy.yml` 发布 `dist/`。这项设置属于 GitHub 仓库配置，重新部署仍需保持 GitHub Actions 作为 Source。
