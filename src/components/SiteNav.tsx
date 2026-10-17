@@ -1,8 +1,9 @@
+import { ThemeToggle } from "./ui/ThemeToggle";
 export function SiteNav() {
   return (
     <header className="site-header">
       <div className="wrap nav-inner">
-        <a href="#" className="brand" aria-label="小游档案首页">
+        <a href="#" className="brand">
           <svg
             viewBox="0 0 24 24"
             width="32"
@@ -26,9 +27,7 @@ export function SiteNav() {
             </span>
           </a>
         </nav>
-        <span className="nav-stamp">
-          <span className="signal" /> PRESS START
-        </span>
+        <ThemeToggle />
       </div>
     </header>
   );

@@ -1,3 +1,33 @@
+# 2026-10-17 视觉与交互升级验收
+
+检查对象：npm run build 的正式产物，使用 http://127.0.0.1:4173/ 生产预览。本节记录上线前的本地实测，后文保留原有历史记录。
+
+## 本次已通过
+
+- TypeScript 与 Vite 构建通过，修改文件的 git diff --check 通过。
+- playwright-cli 执行 scripts/verify-site.js 返回 passed: true。十二个项目、三项首屏选择、分类、玩法搜索、无结果重置、所有详情、深链接、Esc、Tab 焦点与焦点恢复均通过。
+- 320、390、768、1024、1440px 宽度无横向溢出，390px 详情无横向溢出。桌面与 390px 浅深主题已实际打开查看。
+- 系统浅深主题、手动切换、刷新后保留选择通过。减少动画时所有循环视频暂停。
+- 鼠标移动确实改变展示窗的 spring transform；点击小卡带实际触发跳跃与像素碎屑；筛选后作品数和布局更新正确。
+- 通过详情的真实链接打开 /play/the-called/，进入地图与 WASM 对局，出牌到第九格，等待需要的能力目标出现并选择，随后返回地图、打开牌组构筑。未修改游戏构建。
+- 完整流程无未处理脚本错误，无同源 4xx / 5xx 资源失败。媒体与吉祥物均正常显示，WebP 含透明通道，288×288，约 11KB。
+- Lighthouse 正式产物：手机与桌面的无障碍、最佳实践、SEO 均为 100 分。桌面品牌链接的可访问名称额外修正为使用可见文字。独立的 Agentic Browsing 项因未提供 llms.txt 未满分，这不是标准 SEO 项。
+- 本机冷加载性能跟踪：LCP 156ms，CLS 0.00。使用本机静态服务器、无 CPU 或网络限速，不代表公网或真实用户性能，未测得现场 INP。
+
+## 本次实机证据
+
+- artifacts/home-desktop.png：1440px 浅色完整主页。
+- artifacts/home-mobile.png：390px 浅色完整主页。
+- artifacts/dialog-mobile.png：390px 项目详情。
+- artifacts/portfolio-dark.png：1440px 深色首屏。
+- docs/art-direction.md：改版审视、视觉规则、动效用途、生成素材提示词。
+
+验收脚本必须运行在 production preview。Vite dev 对 public 下目录的 HTML 请求可能回退主页，不能用它验证嵌入式静态游戏。原脚本在出牌后立即判断目标是否可见存在竞争；本次改为等待目标选择或回合继续状态，再进行后续操作。脚本同时等待筛选退出动画结束后检查作品数量。
+
+本次未重新验证网盘下载权限或对 The Called 全部规则做回归。页面不新增用户身份信息，也不自动发声。
+
+---
+
 # 验收记录
 
 2026-10-13，Windows / Chromium。检查对象为 `npm run build` 生成的产物，使用 Vite production preview 托管。

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MediaItem } from "../../content/types";
 
 interface Props {
@@ -23,11 +23,10 @@ export function Media({
 }: Props) {
   if (item.kind === "image") {
     return (
-      <img
+      <ImageMedia
         src={item.src}
         alt={item.alt}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
+        priority={priority}
         className={className}
       />
     );
@@ -53,10 +52,11 @@ interface VideoProps {
 
 function LoopVideo({ src, poster, alt, className, autoplay }: VideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || !autoplay) return;
+    if (!video || !autoplay || failed) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     const updatePlayback = () => {
@@ -73,7 +73,7 @@ function LoopVideo({ src, poster, alt, className, autoplay }: VideoProps) {
         visible = entry.isIntersecting;
         updatePlayback();
       },
-      { rootMargin: "200px 0px", threshold: 0.01 },
+      { rootMargin: "0px", threshold: 0.01 },
     );
     io.observe(video);
     preference.addEventListener("change", updatePlayback);
@@ -84,11 +84,14 @@ function LoopVideo({ src, poster, alt, className, autoplay }: VideoProps) {
       document.removeEventListener("visibilitychange", updatePlayback);
       video.pause();
     };
-  }, [src, autoplay]);
+  }, [src, autoplay, failed]);
 
+  if (failed)
+    return <ImageMedia src={poster} alt={alt} className={className} />;
   return (
     <video
       ref={ref}
+      onError={() => setFailed(true)}
       poster={poster}
       muted
       loop
@@ -98,6 +101,41 @@ function LoopVideo({ src, poster, alt, className, autoplay }: VideoProps) {
       className={className}
       // 减少动画时保留海报帧即可；autoplay=false 时交给使用方控制
       {...(!autoplay ? { src, controls: true } : {})}
+    />
+  );
+}
+
+function ImageMedia({
+  src,
+  alt,
+  className,
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  const [failed, setFailed] = useState(false);
+  if (failed)
+    return (
+      <div
+        className={`${className ?? ""} media-error`}
+        role="img"
+        aria-label={alt}
+      >
+        画面暂时无法加载
+      </div>
+    );
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      decoding="async"
+      className={className}
+      onError={() => setFailed(true)}
     />
   );
 }

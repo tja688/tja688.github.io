@@ -1,6 +1,6 @@
 # 小游档案
 
-作品优先的独立游戏主页。使用像素墨色的灰阶材质、方角边框、少量荧绿交互提示；作品画面保留原本的美术风格。
+作品优先的独立游戏主页。使用浅绿强调色、方角和像素细节，支持浅深主题；作品画面保留原本的美术风格。封面、切换、筛选与小卡带彩蛋带有弹性反馈。
 
 Vite + React + TypeScript，部署到 GitHub Pages。推送 `main` 后自动构建发布。仓库 Pages 设置的 Source 使用 GitHub Actions，不能使用 `main / root` 的分支发布，否则会把源码入口直接发到线上。
 
@@ -66,7 +66,7 @@ playwright-cli -s=qa open http://localhost:5175
 playwright-cli -s=qa run-code --filename=scripts/verify-site.js
 ```
 
-验证分类、搜索、空状态、所有项目弹窗、深链接、键盘焦点、减少动画、五种屏宽及静态托管游戏的实际出牌路径。截图输出到忽略提交的 `artifacts/`。`verify-site.js` 是 CLI 所需的单函数表达式，末尾不加分号。
+验证分类、搜索、空状态、所有项目弹窗、深链接、键盘焦点、浅深主题及记忆、指针反馈、小卡带彩蛋、减少动画、五种屏宽及静态托管游戏的实际出牌路径。截图输出到忽略提交的 `artifacts/`。`verify-site.js` 是 CLI 所需的单函数表达式，末尾不加分号。
 
 ## 资源与授权
 

@@ -1,35 +1,66 @@
+"use client";
+import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpIcon, ArrowUpRightIcon } from "@phosphor-icons/react";
+import { Burst, Reveal } from "./ui/Motion";
 export function Footer() {
+  const [jumps, setJumps] = useState(0);
+  const reduce = useReducedMotion();
   return (
     <footer className="site-footer wrap">
-      <div>
-        <p className="eyebrow">THANKS FOR PLAYING</p>
-        <h2>下个小世界，再见。</h2>
-        <p>这里会继续放一些新游戏，和不太成熟的新点子。</p>
-      </div>
-      <div className="footer-links">
-        <a
-          href="https://tja688.itch.io"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Reveal className="footer-main">
+        <div>
+          <h2>下个小世界见。</h2>
+          <div className="footer-links">
+            <a
+              href="https://tja688.itch.io"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              itch.io <ArrowUpRightIcon size={16} aria-hidden="true" />
+            </a>
+            <a
+              href="https://github.com/tja688"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub <ArrowUpRightIcon size={16} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+        <button
+          className="mascot-button"
+          onClick={() => setJumps((n) => n + 1)}
+          aria-label="和小卡带打个招呼"
         >
-          itch.io <span aria-hidden="true">↗</span>
-        </a>
-        <a
-          href="https://github.com/tja688"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub <span aria-hidden="true">↗</span>
-        </a>
-        <a href="#">
-          回到起点 <span aria-hidden="true">↑</span>
-        </a>
-      </div>
+          <motion.img
+            key={jumps}
+            src="/media/site/cartridge.webp"
+            alt=""
+            width="144"
+            height="144"
+            loading="lazy"
+            initial={false}
+            animate={
+              jumps && !reduce
+                ? {
+                    y: [0, 4, -40, 0, -9, 0],
+                    rotate: [0, -8, 12, -5, 0],
+                    scaleX: [1, 1.12, 0.94, 1.08, 1],
+                  }
+                : undefined
+            }
+            transition={{ duration: 0.68 }}
+          />
+          {jumps > 0 && <Burst key={`burst-${jumps}`} />}
+        </button>
+      </Reveal>
       <div className="footer-bottom">
-        <span>小游档案 / INDEPENDENT GAMES</span>
-        <span>
-          MADE WITH CURIOSITY <span aria-hidden="true">✦</span>
-        </span>
+        <span>小游档案</span>
+        <a href="#" aria-label="回到起点">
+          <ArrowUpIcon size={18} aria-hidden="true" />
+        </a>
+        <span>THANKS FOR PLAYING</span>
       </div>
     </footer>
   );

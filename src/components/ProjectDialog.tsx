@@ -1,3 +1,9 @@
+import {
+  ArrowUpRightIcon,
+  ArrowDownLeftIcon,
+  TrophyIcon,
+  XIcon,
+} from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import type { Project } from "../content/types";
 import { kindLabel, statusLabel } from "../content/labels";
@@ -51,8 +57,9 @@ export function ProjectDialog({
       {project && (
         <div className="dialog-inner" data-scroll>
           <header className="dialog-bar">
-            <span className="eyebrow">
-              GAME FILE / {project.year} / {kindLabel[project.kind]}
+            <span className="project-meta">
+              {kindLabel[project.kind]}
+              <span>{project.year}</span>
             </span>
             <button
               className="dialog-close"
@@ -60,13 +67,12 @@ export function ProjectDialog({
               aria-label="关闭作品详情"
               autoFocus
             >
-              关闭 <span aria-hidden="true">×</span>
+              关闭 <XIcon size={18} aria-hidden="true" />
             </button>
           </header>
           <div className="dialog-heading">
             <div>
               <p className={`status-label status-${project.status}`}>
-                <span />
                 {statusLabel[project.status]}
               </p>
               <h2 id="project-dialog-title">{project.title}</h2>
@@ -79,7 +85,7 @@ export function ProjectDialog({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                在线试玩 <span aria-hidden="true">↗</span>
+                在线试玩 <ArrowUpRightIcon size={18} aria-hidden="true" />
               </a>
             )}
           </div>
@@ -93,13 +99,12 @@ export function ProjectDialog({
           </div>
           <div className="dialog-body">
             <div className="project-story">
-              <p className="eyebrow">ABOUT THIS GAME</p>
               {project.description.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
               {project.award && (
                 <p className="award">
-                  <span aria-hidden="true">✦</span> {project.award}
+                  <TrophyIcon size={15} aria-hidden="true" /> {project.award}
                 </p>
               )}
             </div>
@@ -127,24 +132,26 @@ export function ProjectDialog({
                 )}
               </dl>
               <div className="project-links">
-                {project.links.map((link) => (
-                  <div key={link.url}>
-                    <a
-                      className={`button ${link.kind === "play" || link.kind === "download" ? "primary" : ""}`}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {link.label ?? "获取试玩包"}{" "}
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                    {link.kind === "download" && link.code && (
-                      <CopyField value={link.code} className="copy-code">
-                        提取码 <span>{link.code}</span>
-                      </CopyField>
-                    )}
-                  </div>
-                ))}
+                {project.links
+                  .filter((link) => link.kind !== "play")
+                  .map((link) => (
+                    <div key={link.url}>
+                      <a
+                        className={`button ${link.kind === "download" ? "primary" : ""}`}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {link.label ?? "获取试玩包"}{" "}
+                        <ArrowUpRightIcon size={17} aria-hidden="true" />
+                      </a>
+                      {link.kind === "download" && link.code && (
+                        <CopyField value={link.code} className="copy-code">
+                          提取码 <span>{link.code}</span>
+                        </CopyField>
+                      )}
+                    </div>
+                  ))}
                 {project.links.length === 0 && (
                   <p className="no-build">这份档案暂时没有试玩版本。</p>
                 )}
@@ -153,7 +160,7 @@ export function ProjectDialog({
           </div>
           {project.gallery.length > 0 && (
             <section className="dialog-gallery" aria-label="游戏画面">
-              <p className="eyebrow">MORE FROM THIS WORLD / 游戏画面</p>
+              <h3>游戏画面</h3>
               <div>
                 {project.gallery.map((item) => (
                   <figure key={item.src}>
@@ -165,9 +172,8 @@ export function ProjectDialog({
             </section>
           )}
           <div className="dialog-end">
-            <span className="eyebrow">END OF FILE</span>
             <button onClick={onClose}>
-              返回作品库 <span aria-hidden="true">↙</span>
+              返回作品库 <ArrowDownLeftIcon size={16} aria-hidden="true" />
             </button>
           </div>
         </div>

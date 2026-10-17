@@ -1,3 +1,4 @@
+import { MotionConfig } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { projectBySlug } from "../content/projects";
 import { SiteNav } from "../components/SiteNav";
@@ -46,18 +47,20 @@ export const App = () => {
   const active = activeSlug ? (projectBySlug(activeSlug) ?? null) : null;
 
   return (
-    <div>
-      <a href="#games" className="skip-link">
-        跳到作品库
-      </a>
-      <SiteNav />
-      <main>
-        <Hero onOpenProject={openProject} />
-        <FeaturedWork onOpenProject={openProject} />
-        <ProjectArchive onOpenProject={openProject} />
-      </main>
-      <Footer />
-      <ProjectDialog project={active} onClose={closeProject} />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div>
+        <a href="#games" className="skip-link">
+          跳到作品库
+        </a>
+        <SiteNav />
+        <main>
+          <Hero onOpenProject={openProject} />
+          <FeaturedWork onOpenProject={openProject} />
+          <ProjectArchive onOpenProject={openProject} />
+        </main>
+        <Footer />
+        <ProjectDialog project={active} onClose={closeProject} />
+      </div>
+    </MotionConfig>
   );
 };
