@@ -55,4 +55,6 @@ export interface Project {
   tags?: string[];
   /** 是否进入首页精选（建议 2–4 个） */
   featured?: boolean;
+  /** 暂时不出现在站点上，文案和素材仍留在目录里 */
+  withheld?: boolean;
 }

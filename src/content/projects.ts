@@ -3,8 +3,9 @@ import type { Project } from "./types";
 /**
  * 全部项目，按时间倒序排列（正在开发的放最前）。
  * 媒体文件放在 `public/media/<slug>/`，路径从站点根写起。
+ * `withheld` 的条目先不进入页面。
  */
-export const projects: Project[] = [
+const catalog: Project[] = [
   {
     slug: "the-called",
     title: "The Called",
@@ -44,6 +45,7 @@ export const projects: Project[] = [
     links: [{ kind: "play", url: "/play/the-called/", label: "在线试玩" }],
     tags: ["TCG", "点数覆盖", "地盘争夺"],
     featured: true,
+    withheld: true,
   },
   {
     slug: "jiugong",
@@ -462,6 +464,9 @@ export const projects: Project[] = [
     tags: ["Unity", "未完成"],
   },
 ];
+
+/** 站点上可见的项目。 */
+export const projects = catalog.filter((p) => !p.withheld);
 
 export const featuredProjects = projects.filter((p) => p.featured);
 

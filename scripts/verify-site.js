@@ -28,14 +28,17 @@ async (page) => {
     await page.goto(origin);
     await page.locator(".showcase-media").waitFor();
     assert(
-      (await page.locator(".archive-card").count()) === 12,
-      "Expected twelve works",
+      (await page.locator(".archive-card").count()) === 11,
+      "Expected eleven works",
+    );
+    const pageText = await page.locator("body").innerText();
+    assert(
+      !/唐今|专任教师|纽卡斯尔大学|微信|315635975/.test(pageText),
+      "Personal identity remains visible",
     );
     assert(
-      !/唐今|专任教师|纽卡斯尔大学|微信|315635975/.test(
-        await page.locator("body").innerText(),
-      ),
-      "Personal identity remains visible",
+      !/The Called|地盘争夺|失控机械/.test(pageText),
+      "Withheld work remains visible",
     );
     await page
       .locator(".showcase-selector")
@@ -56,15 +59,18 @@ async (page) => {
     );
     await page
       .locator(".showcase-selector")
-      .getByRole("button", { name: "The Called", exact: true })
+      .getByRole("button", { name: "PhantomFlash", exact: true })
       .click();
     stage = "project dialogs";
     const opener = page.getByRole("button", {
-      name: "打开 The Called",
+      name: "打开 PhantomFlash",
       exact: true,
     });
     await opener.click();
-    assert(page.url().endsWith("#p/the-called"), "Project URL was not updated");
+    assert(
+      page.url().endsWith("#p/phantom-flash"),
+      "Project URL was not updated",
+    );
     assert(
       (await page.locator("dialog[open]").count()) === 1,
       "Dialog did not open",
@@ -95,9 +101,9 @@ async (page) => {
       "Page scroll remained locked",
     );
     await page.getByRole("button", { name: "练手原型" }).click();
-    await waitForWorks(2);
+    await waitForWorks(1);
     assert(
-      (await page.locator(".archive-card").count()) === 2,
+      (await page.locator(".archive-card").count()) === 1,
       "Prototype filter failed",
     );
     await page.getByRole("button", { name: "Game Jam" }).click();
@@ -107,10 +113,10 @@ async (page) => {
       "Jam filter failed",
     );
     await page.getByRole("button", { name: "全部作品" }).click();
-    await waitForWorks(12);
+    await waitForWorks(11);
     await page
       .getByRole("searchbox", { name: "搜索作品或玩法" })
-      .fill("地盘争夺");
+      .fill("皮影");
     await waitForWorks(1);
     assert(
       (await page.locator(".archive-card").count()) === 1,
@@ -125,9 +131,9 @@ async (page) => {
       "Empty state missing",
     );
     await page.getByRole("button", { name: "重置筛选" }).click();
-    await waitForWorks(12);
+    await waitForWorks(11);
     assert(
-      (await page.locator(".archive-card").count()) === 12,
+      (await page.locator(".archive-card").count()) === 11,
       "Reset did not restore all works",
     );
     for (const button of await page
@@ -205,7 +211,7 @@ async (page) => {
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page
-      .getByRole("button", { name: "打开 The Called", exact: true })
+      .getByRole("button", { name: "打开 PhantomFlash", exact: true })
       .click();
     assert(
       await page
@@ -217,62 +223,15 @@ async (page) => {
     await page.keyboard.press("Escape");
     await page.goto(`${origin}/#p/the-called`);
     assert(
-      (await page.locator("dialog[open] h2").innerText()) === "The Called",
+      (await page.locator("dialog[open]").count()) === 0,
+      "Withheld project URL still opens",
+    );
+    await page.goto(`${origin}/#p/jiugong`);
+    assert(
+      (await page.locator("dialog[open] h2").innerText()) === "九宫地下城",
       "Shared project URL failed",
     );
-    const playLink = page
-      .locator(".dialog-heading")
-      .getByRole("link", { name: "在线试玩" });
-    stage = "hosted game";
-    const popupPromise = page.waitForEvent("popup");
-    await playLink.click();
-    const game = await popupPromise;
     const gameErrors = [];
-    game.setDefaultTimeout(15000);
-    game.on("pageerror", (error) => gameErrors.push(error.message));
-    game.on("response", onResponse);
-    await game.setViewportSize({ width: 1440, height: 900 });
-    await game.getByRole("button", { name: "开始冒险 踏入九格之间" }).waitFor();
-    assert(
-      game.url() === origin + "/play/the-called/",
-      "Play link opened incorrect path",
-    );
-    await game.getByRole("button", { name: "开始冒险 踏入九格之间" }).click();
-    await game.getByRole("button", { name: "走到失控机械" }).click();
-    const card = game
-      .getByRole("region", { name: "手牌区域" })
-      .getByRole("button", { name: /，\d+ 点$/ })
-      .first();
-    const cardName = (await card.getAttribute("aria-label")).split("，")[0];
-    await card.click();
-    await game
-      .getByRole("button", { name: "格位 9，空格，可选择", exact: true })
-      .click();
-    const target = game
-      .getByRole("button", { name: /格位.*怪物，可选择/ })
-      .first();
-    await game.waitForFunction(() => [...document.querySelectorAll("button")].some((button) => /怪物，可选择/.test(button.getAttribute("aria-label") ?? "") || (button.textContent?.includes("结束回合") && !button.disabled)), undefined, { timeout: 15000 });
-    if (await target.isVisible()) await target.click();
-    await game.waitForFunction(() =>
-      [...document.querySelectorAll("button")].some(
-        (b) => b.textContent?.includes("结束回合") && !b.disabled,
-      ),
-    );
-    assert(
-      (await game
-        .getByRole("button", { name: new RegExp("格位 9，" + cardName) })
-        .count()) === 1,
-      "Actual card placement failed",
-    );
-    await game.getByRole("button", { name: "‹ 返回地图" }).click();
-    await game.getByRole("button", { name: "返回地图", exact: true }).click();
-    await game.getByRole("button", { name: "构筑牌组" }).click();
-    await game.getByRole("heading", { name: "卡盒与构筑" }).waitFor();
-    assert(
-      await game.getByRole("heading", { name: "卡盒与构筑" }).isVisible(),
-      "Deck builder failed",
-    );
-    await game.close();
     await page.keyboard.press("Escape");
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(origin);
@@ -303,14 +262,14 @@ async (page) => {
     );
     return {
       passed: true,
-      works: 12,
+      works: 11,
       viewports: [320, 390, 768, 1024, 1440],
       filters: "all, prototypes, jams, search, reset",
-      dialogs: "12 works, escape, keyboard focus, shared URL",
+      dialogs: "11 works, escape, keyboard focus, shared URL",
       reducedMotion: "paused videos",
       theme: "system light/dark, manual toggle, persistence",
       juice: "pointer tilt, clickable mascot, animated filters",
-      game: "real hosted path, map, WASM battle, card placement, deck builder",
+      withheld: "The Called stays out of the catalog and shared URL",
       runtimeErrors: [],
       failedRequests: [],
       screenshots:

@@ -8,11 +8,12 @@ import {
 } from "@phosphor-icons/react";
 import { projects } from "../content/projects";
 import { coverImage, statusLabel } from "../content/labels";
+import type { Project } from "../content/types";
 import { Media } from "./ui/Media";
 import { Burst, MagneticLink, Tilt } from "./ui/Motion";
-const showcase = projects.filter((p) =>
-  ["the-called", "jiugong", "wind-will-read"].includes(p.slug),
-);
+const showcase = ["phantom-flash", "jiugong", "wind-will-read"]
+  .map((slug) => projects.find((item) => item.slug === slug))
+  .filter((item): item is Project => item !== undefined);
 
 export function Hero({
   onOpenProject,
